@@ -12,7 +12,9 @@ class Attribute
     public $nu;
     public $def;
     public $pk;
-    public function __construct($xml) {
+    public $index;
+    public function __construct($xml, $index) {
+        $this->index = $index;
         if (!is_null($xml)) {
             $this->read($xml);
         }

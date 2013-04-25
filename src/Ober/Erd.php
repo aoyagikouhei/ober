@@ -17,8 +17,10 @@ class Erd
         $this->xml = simplexml_load_file($path);
         $list = $this->xml->xpath('/ERD/ENTITY');
         $this->entityAry = [];
+        $index = 0;
         foreach ($list as $it) {
-            $this->entityAry[] = new \Ober\Entity($it);
+            $this->entityAry[] = new \Ober\Entity($it, $index);
+            $index += 1;
         }
     }
 

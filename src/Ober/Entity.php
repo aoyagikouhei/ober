@@ -7,7 +7,9 @@ class Entity
     public $pn;
     public $ln;
     public $attributeAry;
-    public function __construct($xml) {
+    public $index;
+    public function __construct($xml, $index) {
+        $this->index = $index;
         if (!is_null($xml)) {
             $this->read($xml);
         }
@@ -20,8 +22,10 @@ class Entity
         $this->ln = (string)$this->xml['L-NAME'];
         $list = $this->xml->xpath('.//ATTR');
         $this->attributeAry = [];
+        $index = 0;
         foreach ($list as $it) {
-            $this->attributeAry[] = new \Ober\Attribute($it);
+            $this->attributeAry[] = new \Ober\Attribute($it, $index);
+            $index += 1;
         }
     }
 }
