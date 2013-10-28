@@ -8,6 +8,7 @@ class Entity
     public $ln;
     public $attributeAry;
     public $index;
+    public $comment;
     public function __construct($xml, $index) {
         $this->index = $index;
         if (!is_null($xml)) {
@@ -20,6 +21,7 @@ class Entity
         $this->xml = $xml;
         $this->pn = (string)$this->xml['P-NAME'];
         $this->ln = (string)$this->xml['L-NAME'];
+        $this->comment = (string)$this->xml['COMMENT'];
         $list = $this->xml->xpath('.//ATTR');
         $this->attributeAry = [];
         $index = 0;

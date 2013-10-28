@@ -13,6 +13,7 @@ class Attribute
     public $def;
     public $pk;
     public $index;
+    public $comment;
     public function __construct($xml, $index) {
         $this->index = $index;
         if (!is_null($xml)) {
@@ -31,5 +32,6 @@ class Attribute
         $this->nu = '1' === (string)$this->xml['NULL'];
         $this->def = (string)$this->xml['DEF'];
         $this->pk = '1' === (string)$this->xml['PK'];
+        $this->comment = (string)$this->xml['COMMENT'];
     }
 }
