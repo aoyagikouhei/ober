@@ -12,9 +12,23 @@ class Erd
         }
     }
 
+    private function read_file($path) {
+        $str = file_get_contents($path);
+        $parts = explode("<", $str); //split over <
+        array_shift($parts); //remove the blank array element
+        $newParts = array(); //create array for storing new parts
+        foreach($parts as $p)
+        {
+            list($attr,$other) = explode(">", $p, 2); //get attribute data into $attr
+            $attr = str_replace("\r\n", "&#10;", $attr); //do the replacement
+            $newParts[] = $attr.">".$other; // put parts back together
+        }
+        return "<".implode("<", $newParts); // put parts back together prefixing with
+    }
+
     public function read($path)
     {
-        $this->xml = simplexml_load_file($path);
+        $this->xml = simplexml_load_string($this->read_file($path));
         $list = $this->xml->xpath('/ERD/ENTITY');
         $this->entityAry = [];
         $index = 0;
